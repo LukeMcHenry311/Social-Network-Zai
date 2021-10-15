@@ -81,11 +81,6 @@ const UserController = {
       { $push: { friends: params.friendId } },
       { new: true, runValidators: true }
     )
-      .populate({
-        path: "friends",
-        select: "-__v",
-      })
-      .select("-__v")
       .then((dbUser) => {
         if (!dbUser) {
           res.status(404).json({ message: "no user found" });
@@ -104,11 +99,6 @@ const UserController = {
       { $pull: { friends: params.friendId } },
       { new: true, runValidators: true }
     )
-      .populate({
-        path: "friends",
-        select: "-__v",
-      })
-      .select("-__v")
       .then((dbUser) => {
         if (!dbUser) {
           res.status(404).json({ message: "no user found" });
