@@ -71,7 +71,7 @@ const thoughtController = {
       });
   },
 
-  deleteThought({ parms }, res) {
+  deleteThought({ params }, res) {
     Thought.findByIdAndDelete({ _id: params.id })
       .then((dbThought) => {
         if (!dbThought) {

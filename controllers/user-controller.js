@@ -3,12 +3,21 @@ const { User } = require("../models");
 const UserController = {
   getAllUsers(req, res) {
     User.find({})
-      .then((dbUser) => {
-        res.json(dbUser);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
+    .populate({
+      path: 'thoughts',
+      select: '-__V'
+    })
+    .populate({
+      path: 'friends',
+      select: '-__V'
+    })
+    .select('-__V')
+    .sort({ _id: -1 })
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(400).json(err);
+    })
   },
 
   getUserById({ params }, res) {
@@ -35,6 +44,7 @@ const UserController = {
   },
 
   createUser({ body }, res) {
+    console.log(body);
     User.create(body)
       .then((dbUser) => {
         res.json(dbUser);
