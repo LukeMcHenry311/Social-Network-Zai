@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(require("./routes"));
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/social-network-zai",
+  process.env.MONGODB_URI || "mongodb://localhost/social-net-api",
   {
     useFindAndModify: false,
     useNewUrlParser: true,
@@ -21,4 +21,4 @@ mongoose.connect(
 mongoose.set("useCreateIndex", true);
 mongoose.set("debug", true);
 
-app.listen(PORT, () => console.log(`connected on localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));
