@@ -18,6 +18,7 @@ mongoose.connect(
   }
 );
 
+mongoose.set("useCreateIndex", true);
 mongoose.set("debug", true);
 
 app.get("/users", (req, res) => {
