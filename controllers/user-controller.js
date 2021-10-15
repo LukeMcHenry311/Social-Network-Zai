@@ -12,16 +12,16 @@ const UserController = {
   },
 
   getUserById({ params }, res) {
-    User.findOne({ _id: params.userId })
+    User.findOne({ _id: params.id })
       .populate({
         path: "thoughts",
-        selet: "-__v",
+        select: "-__v",
       })
       .populate({
         path: "friends",
-        selet: "-__v",
+        select: "-__v",
       })
-      .selet("-__v")
+      .select("-__v")
       .then((dbUser) => {
         if (!dbUser) {
           res.status(404).json({ message: "no user found" });
@@ -45,7 +45,7 @@ const UserController = {
   },
 
   updateUserById({ params, body }, res) {
-    User.findOneAndUpdate({ _id: params.userId }, body, {
+    User.findOneAndUpdate({ _id: params.id }, body, {
       new: true,
       runValidator: true,
     })
@@ -62,7 +62,7 @@ const UserController = {
   },
 
   deleteUserById({ params }, res) {
-    User.findByIdAndDelete({ _id: params.userId })
+    User.findByIdAndDelete({ _id: params.id })
       .then((dbUser) => {
         if (!dbUser) {
           res.status(404).json({ message: "no user found" });
@@ -85,7 +85,7 @@ const UserController = {
         path: "friends",
         select: "-__v",
       })
-      .selet("-__v")
+      .select("-__v")
       .then((dbUser) => {
         if (!dbUser) {
           res.status(404).json({ message: "no user found" });
@@ -108,7 +108,7 @@ const UserController = {
         path: "friends",
         select: "-__v",
       })
-      .selet("-__v")
+      .select("-__v")
       .then((dbUser) => {
         if (!dbUser) {
           res.status(404).json({ message: "no user found" });
